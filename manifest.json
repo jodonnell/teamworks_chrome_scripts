@@ -2,7 +2,7 @@
     "name": "Teamworks shortcuts",
     "version": "1.0",
     "description": "Teamworks shortcuts",
-    "permissions": ["tabs"],
+    "permissions": ["tabs", "http://localhost:3000/*"],
     "manifest_version": 2,
     "content_scripts": [
         {

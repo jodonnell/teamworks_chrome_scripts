@@ -22,22 +22,53 @@ function workingStyles() {
 
 function skills() {
     if (window.location.pathname.match(/skills$/)) {
-        $('.orb').click();
-        $('.option1 .add').click()
-        $('.option1 textarea').val('Yummy!');
-        $('.option1 textarea').blur();
-        $('.orb').click();
+        $('.orb.active').click();
+        waitUntil('.page-container .tech-skills-page', function () {
+            $.fx.off = true;
 
-        $('.suggestion.out-of-the-box').first().click();
-        $('.option2 .add').click();
-        $('.suggestion.out-of-the-box').get(2).click();
-        $('.option3 .add').click();
-        $('.suggestion.out-of-the-box').get(3).click();
-        $('.orb').click();
+            $('.orb.active').click();
+            var page1 = $('.page-container .tech-skills .option1');
+            page1.find('.add').click()
+            page1.find('textarea').val('Yummy!');
+            page1.find('textarea').trigger('focus');
+            page1.find('textarea').trigger('blur');
 
-        $('.option1 .add').click()
-        $('.option1 textarea').val('Yummy!');
-        $('.option1 textarea').blur();
-        $('.orb').click();
+            _.delay(function() {
+                $('.orb.active').click();
+
+                var page2 = $('.page-container .soft-skills');
+                page2.find('.option1 .add').click()
+                $('.suggestion.out-of-the-box').first().click();
+                page2.find('.option2 .add').click()
+                $('.suggestion.out-of-the-box').get(2).click();
+                page2.find('.option3 .add').click()
+                $('.suggestion.out-of-the-box').get(3).click();
+
+                _.delay(function() {
+                    $('.orb.active').click();
+                    waitUntil('.page-container .outside-skills-page', function () {
+                        var page3 = $('.page-container .outside-skills .option1');
+                        page3.find('.add').click()
+                        page3.find('textarea').val('Yummy!');
+                        page3.find('textarea').trigger('focus');
+                        page3.find('textarea').trigger('blur');
+                        _.delay(function() {
+                            $('.orb.active').click();
+                        }, 300);
+                    });
+                }, 300);
+            }, 300);
+        });
+    }
+}
+
+function waitUntil(selector, func) {
+    if ($(selector).is(':visible')) {
+        func();
+        alert('finish')
+    }
+    else {
+        _.delay(waitUntil, 200, selector, func);
+        alert('delay')
     }
 }
