@@ -3,6 +3,7 @@ $(document).ready(function(){
         if (!(event.which == 115 && event.ctrlKey) && !(event.which == 19)) return true;
 
         workingStyles();
+        skills();
 
         event.preventDefault();
         return false;
@@ -19,6 +20,24 @@ function workingStyles() {
     }
 }
 
+function skills() {
+    if (window.location.pathname.match(/skills$/)) {
+        $('.orb').click();
+        $('.option1 .add').click()
+        $('.option1 textarea').val('Yummy!');
+        $('.option1 textarea').blur();
+        $('.orb').click();
 
+        $('.suggestion.out-of-the-box').first().click();
+        $('.option2 .add').click();
+        $('.suggestion.out-of-the-box').get(2).click();
+        $('.option3 .add').click();
+        $('.suggestion.out-of-the-box').get(3).click();
+        $('.orb').click();
 
-
+        $('.option1 .add').click()
+        $('.option1 textarea').val('Yummy!');
+        $('.option1 textarea').blur();
+        $('.orb').click();
+    }
+}
