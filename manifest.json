@@ -1,0 +1,13 @@
+{
+    "name": "Teamworks shortcuts",
+    "version": "1.0",
+    "description": "Teamworks shortcuts",
+    "permissions": ["tabs"],
+    "manifest_version": 2,
+    "content_scripts": [
+        {
+	          "matches": ["http://*/*", "https://*/*"],
+	          "js": ["jquery.js", "underscore.js", "teamworks.js"]
+        }
+    ]
+}
