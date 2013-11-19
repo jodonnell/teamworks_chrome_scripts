@@ -32,6 +32,11 @@ $(document).ready(function(){
         boldMovesPrework();
         boldMovesRating();
         boldMovesFirstMove();
+
+        outcomesPulseCheck();
+        outcomesIdentifier();
+        outcomesBriefs();
+        outcomesBrief();
         
         event.preventDefault();
         return false;
@@ -49,8 +54,10 @@ function board() {
         || window.location.pathname.match(/forces$/)) {
         $('.orb.start-loop').click();
         $('.confirm.button').click();
-        var link = $($('.orb.active')[$('.orb.active').length - 2]);
-        clickLink(link);
+        _.delay(function () {
+            var link = $($('.orb.active')[$('.orb.active').length - 2]);
+            clickLink(link);
+        }, 300);
     }
 }
     
@@ -278,6 +285,56 @@ function clickLink(link) {
         window.location = link.find('a')[0].href;
     else
 		    link.click();
+}
+
+function outcomesPulseCheck() {
+		if (window.location.pathname.match(/outcomes\/pulse-check$/)) {
+		    $('.orb.active').click();
+        $('.ui-slider-handle').simulate( "drag", {dx: 50,  dy: 50 });
+        $('textarea').val('cookie');
+        $('textarea').trigger('keydown');
+        $('.orb.active').click();
+
+        $('.ui-slider-handle').simulate( "drag", {dx: 80,  dy: 50 });
+        $('textarea').val('baby');
+        $('textarea').trigger('keydown');
+        $('.orb.active').click();
+
+        $('.ui-slider-handle').simulate( "drag", {dx: 10,  dy: 50 });
+        $('textarea').val('yummy');
+        $('textarea').trigger('keydown');
+        $('.orb.active').click();
+    }
+}
+
+function outcomesIdentifier() {
+		if (window.location.pathname.match(/outcomes\/identifier$/)) {
+		    $('.orb.active').click();
+        $('.option1 .add').click();
+        $('.option1 .comment-box textarea').val('Big baby');
+        $('.option1 .comment-box textarea').trigger('focus');
+        $('.option1 .comment-box textarea').trigger('blur');
+        _.delay(function () {
+            $('.orb.active').click();				    
+        }, 300);
+    }
+}
+
+function outcomesBriefs() {
+		if (window.location.pathname.match(/outcomes\/briefs$/)) {
+        $('.orb.active').click();
+        $('.orb.active').click();
+        _.delay(function () {
+            clickLink($('.goals'));
+        }, 600);
+    }
+}
+
+function outcomesBrief() {
+		if (window.location.pathname.match(/outcomes\/briefs\/brief$/)) {
+        $('.success').val('a thing here');
+        $('.orb.active').click();
+    }
 }
 
 function waitUntil(selector, func) {
