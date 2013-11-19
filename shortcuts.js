@@ -1,7 +1,13 @@
+var map = {
+
+};
+
 $(document).ready(function(){
     $(window).keypress(function(event) {
         if (!(event.which == 115 && event.ctrlKey) && !(event.which == 19)) return true;
 
+        board();
+        
         superpowers();
         workingStyles();
         skills();
@@ -14,12 +20,40 @@ $(document).ready(function(){
 
         ritual();
         ritualExcercise();
+
+        forcesPrework();
+        forcesMap();
+        forcesDialague();
+
+        reframingLenses();
+        reframingPrework();
+        reframingBrainstorming();
+
+        boldMovesPrework();
+        boldMovesRating();
+        boldMovesFirstMove();
         
         event.preventDefault();
         return false;
     });    
 });
 
+function board() {
+    if (window.location.pathname.match(/strengths$/)
+        || window.location.pathname.match(/purpose$/)
+        || window.location.pathname.match(/bold-moves$/)
+        || window.location.pathname.match(/decisions$/)
+        || window.location.pathname.match(/duos$/)
+        || window.location.pathname.match(/reframing$/)
+        || window.location.pathname.match(/outcomes$/)
+        || window.location.pathname.match(/forces$/)) {
+        $('.orb.start-loop').click();
+        $('.confirm.button').click();
+        var link = $($('.orb.active')[$('.orb.active').length - 2]);
+        clickLink(link);
+    }
+}
+    
 function superpowers() {
     if (window.location.pathname.match(/superpowers\/diagnostic$/)) {
         $.fx.off = true;
@@ -92,7 +126,7 @@ function themes() {
 
 function statement() {
     if (window.location.pathname.match(/statement$/)) {
-        clickLink($('.orb.active a'));
+        clickLink($('.orb.active'));
     }
 }
 
@@ -108,6 +142,24 @@ function personalRitual() {
         $('textarea').val('sugarpops'); $('textarea').trigger('propertychange')
         $('#bi-week').click()
         $('.orb.active').click();
+    }
+}
+
+function forcesPrework() {
+    if (window.location.pathname.match(/forces\/pre-work$/)) {
+        $('.orb.active').click();
+        $('.force').slice(0, 3).click();
+        $('.orb.active').click();
+        $('.send.active').click();
+        $('.orb.active').click();
+    }
+}
+
+function forcesMap() {
+    if (window.location.pathname.match(/forces\/map$/)) {
+        $('.orb.active').click();
+        _(_.rest(forceMap.pages)).each(function (page) {page.selectedValue(2)});
+        _.times(4, function() {$('.orb.active').click() }); 
     }
 }
 
@@ -131,15 +183,101 @@ function ritualExcercise() {
     }
 }
 
-    
+function forcesDialague() {
+    if (window.location.pathname.match(/dialogue$/)) {
+        _.times(4, function() {$('.orb.active').click() }); 
+    }
+}
+
+function reframingLenses() {
+		if (window.location.pathname.match(/lenses$/)) {
+        _.times(4, function() {$('.orb.active').click() }); 
+        $('textarea').val('sugarpops'); $('textarea').trigger('propertychange'); $('.button.create').click();
+        _.delay(reframingLenses, 500);
+    }
+}
+
+function reframingPrework() {
+		if (window.location.pathname.match(/reframing\/pre-work$/)) {
+        $('textarea').val('sugarpops'); $('textarea').trigger('keyup');
+        $('.orb.active').click();
+    }
+}
+
+function reframingBrainstorming() {
+		if (window.location.pathname.match(/reframing\/brainstorming$/)) {
+        $.fx.off = true;
+        $('.orb.active').click();
+        $('.go-circle.active label').click();
+
+        _.delay(function () {
+            $('.start.ready').click();
+            $('textarea').val('yum');
+            $('.save').click();
+            $('.close-button').click();
+            $('.orb.active').click();
+        }, 6000);
+    }
+}
+
+function boldMovesPrework() {
+		if (window.location.pathname.match(/bold-moves\/pre-work$/)) {
+        $('.orb.active').click();
+        _.first($('.move')).click();
+        $('textarea').val('cookie');
+        $('textarea').trigger('propertychange')
+        $('.save.button').click();
+
+        $($('.move')[1]).click();
+        $('textarea').val('cookie');
+        $('textarea').trigger('propertychange');
+        $('.save.button').click();
+
+        _.delay(function () {
+            $('.orb.active').click();
+            $('.send.active').click();
+            $('.orb.active').click();
+        }, 400);
+    }
+}
+
+function boldMovesRating() {
+		if (window.location.pathname.match(/bold-moves\/rating$/)) {
+        $('.orb.active').click();
+        $('.orb.active').click();
+        $('.ui-slider-handle').simulate( "drag", {dx: 50,  dy: 50 });
+        _.delay(function () {
+            $('.orb.active').click();
+            $('.ui-slider-handle').simulate( "drag", {dx: 50,  dy: 50 });
+            $('.orb.active').click();
+        }, 800);
+    }
+}
+
+function boldMovesFirstMove() {
+		if (window.location.pathname.match(/bold-moves\/first-move$/)) {
+        $('.orb.active').click();
+        $('.orb.active').click();
+        $('.large.size').click();
+        $('.orb.active').click();
+        _.first($('.percentage')).click();
+        $('.orb.active').click();
+        $('.move').click();
+        $('.orb.active').click();
+    }
+}
+
 function report() {
     if (window.location.pathname.match(/report$/)) {
-        clickLink($('.orb.active a'));
+        clickLink($('.orb.active'));
     }
 }
 
 function clickLink(link) {
-		window.location = link[0].href;
+    if (link.find('a').length > 0)
+        window.location = link.find('a')[0].href;
+    else
+		    link.click();
 }
 
 function waitUntil(selector, func) {

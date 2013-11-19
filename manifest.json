@@ -4,10 +4,11 @@
     "description": "Teamworks shortcuts",
     "permissions": ["tabs", "http://localhost:3000/*"],
     "manifest_version": 2,
+    "web_accessible_resources": ["shortcuts.js", "jquery.simulate.js"],
     "content_scripts": [
         {
 	          "matches": ["http://*/*", "https://*/*"],
-	          "js": ["jquery.js", "underscore.js", "teamworks.js"]
+	          "js": ["jquery.js", "jquery.simulate.js", "underscore.js", "teamworks.js"]
         }
     ]
 }
