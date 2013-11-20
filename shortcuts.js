@@ -9,6 +9,7 @@ $(document).ready(function(){
         board();
         
         superpowers();
+        superpowersShow();
         workingStyles();
         skills();
         themes();
@@ -65,8 +66,16 @@ function superpowers() {
     if (window.location.pathname.match(/superpowers\/diagnostic$/)) {
         $.fx.off = true;
         $('.orb.active').click();
-        _.times(61, function() { $('.card.face-up').click(); });
-        $('.orb.active').click();
+        _.delay(function () {
+				    $('.card.face-up').click();
+            superpowers();
+        }, 200);
+    }
+}
+
+function superpowersShow() {
+    if (window.location.pathname.match(/strengths\/superpowers\/show$/)) {
+        clickLink($('.orb.active'));
     }
 }
 
